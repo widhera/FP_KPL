@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1273E2A6-5624-40A6-BC84-CD8B92352570}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DrawingToolkit</RootNamespace>
+    <AssemblyName>DrawingToolkit</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DefaultCanvas.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DefaultMenubar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DefaultMenuitem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DefaultToolbar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DefaultToolbox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DrawingObject.cs" />
+    <Compile Include="DrawingState.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ICanvas.cs" />
+    <Compile Include="IMenubar.cs" />
+    <Compile Include="IMenuItem.cs" />
+    <Compile Include="ITool.cs" />
+    <Compile Include="IToolbar.cs" />
+    <Compile Include="IToolbox.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shapes\Chart.cs" />
+    <Compile Include="Shapes\ChartPoint.cs" />
+    <Compile Include="Shapes\Circle.cs" />
+    <Compile Include="Shapes\Square.cs" />
+    <Compile Include="Shapes\StatefullLine.cs" />
+    <Compile Include="States\EditState.cs" />
+    <Compile Include="States\PreviewState.cs" />
+    <Compile Include="States\StaticState.cs" />
+    <Compile Include="Tools\AddPointTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\ChartTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\CircleTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\SelectTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\SquareTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\StatefullLineTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\bounding-box.png" />
+    <Content Include="Resources\bounding-box1.png" />
+    <Content Include="Resources\cursor.png" />
+    <Content Include="Resources\diskette.png" />
+    <Content Include="Resources\file.png" />
+    <Content Include="Resources\folder.png" />
+    <Content Include="Resources\font.png" />
+    <Content Include="Resources\pixel.png" />
+    <Content Include="Resources\pixel1.png" />
+    <Content Include="Resources\vector-diagonal-line-with-box-edges.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
