@@ -1,20 +1,19 @@
-﻿using DrawingToolkit.Shapes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DrawingToolkit.Tools
 {
-    class AddPointTool : ToolStripButton, ITool
+    public class SelectPointTool : ToolStripButton, ITool
     {
-        private DrawingObject selectedObject;
         private ICanvas canvas;
-        private DrawingObject varChart;
+        private DrawingObject selectedObject;
+        private int xInitial;
+        private int yInitial;
+
         public Cursor Cursor
         {
             get
@@ -29,16 +28,19 @@ namespace DrawingToolkit.Tools
             {
                 return this.canvas;
             }
+
             set
             {
                 this.canvas = value;
             }
         }
-        public AddPointTool()
+
+        public SelectPointTool()
         {
-            this.Name = "Stateful Add Chart Point tool";
-            this.ToolTipText = "Stateful Add Chart Point tool";
-            this.Text = "Add Chart Point";
+            this.Name = "Select Point tool";
+            this.ToolTipText = "Select Point tool";
+            //this.Image = IconSet.cursor;
+            this.Text = "Select Point";
             this.CheckOnClick = true;
         }
 
@@ -59,29 +61,34 @@ namespace DrawingToolkit.Tools
 
         public void ToolMouseDown(object sender, MouseEventArgs e)
         {
-            DrawingObject chart = canvas.GetChart(e.Location.X, e.Location.Y);
-            if (chart != null)
+            this.xInitial = e.X;
+            this.yInitial = e.Y;
+            if (e.Button == MouseButtons.Left && canvas != null)
             {
-                Debug.WriteLine(e.Location);
-                chart.AddGraphPoint(new Point(e.X,e.Y));
+                canvas.DeselectAllObject();
+                selectedObject = canvas.SelectObjectAt(e.X, e.Y);
             }
-                
         }
 
         public void ToolMouseMove(object sender, MouseEventArgs e)
         {
-            
+            if (e.Button == MouseButtons.Left && canvas != null)
+            {
+
+                if (selectedObject != null)
+                {
+                    int xAmount = e.X - xInitial;
+                    int yAmount = e.Y - yInitial;
+                    xInitial = e.X;
+                    yInitial = e.Y;
+                    selectedObject.Translate(e.X, e.Y, xAmount, yAmount);
+                }
+            }
         }
 
         public void ToolMouseUp(object sender, MouseEventArgs e)
         {
-            //if (e.Button == MouseButtons.Left)
-            //{
-            //    if (this.varChart != null)
-            //    {
-            //        varChart.Select();
-            //    }
-            //}
+
         }
     }
 }

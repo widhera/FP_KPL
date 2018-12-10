@@ -15,7 +15,8 @@ namespace DrawingToolkit.Shapes
         public Point Startpoint { get; set; }
         public Point Endpoint { get; set; }
         private Pen pen;
-        private List <Point> GraphPoint;
+        //private List <Point> GraphPoint;
+        private List<ChartPoint> GraphPoint;
         //Point point1 = new Point(50, 50);
         //Point point2 = new Point(50, 100);
         //Point point3 = new Point(100, 100);
@@ -25,7 +26,7 @@ namespace DrawingToolkit.Shapes
         {
             this.pen = new Pen(Color.Black);
             pen.Width = 1.5f;
-            this.GraphPoint = new List<Point>();
+            this.GraphPoint = new List<ChartPoint>();
         }
         public Chart(Point startpoint) :
            this()
@@ -84,9 +85,9 @@ namespace DrawingToolkit.Shapes
 
         private void DrawPoint()
         {
-            foreach(Point e in GraphPoint)
+            foreach(ChartPoint chartpoint in GraphPoint)
             {
-                this.Graphics.DrawEllipse(pen, e.X, e.Y, 5, 5);
+                chartpoint.DrawPoint(this.Graphics,pen);
             }
         }
 
@@ -108,8 +109,8 @@ namespace DrawingToolkit.Shapes
 
         public override void AddGraphPoint(Point e)
         {
-            Debug.WriteLine("Masukk");
-            this.GraphPoint.Add(e);
+            ChartPoint chartPoint = new ChartPoint(new Point(e.X, e.Y));
+            this.GraphPoint.Add(chartPoint);
         }
 
         
@@ -153,10 +154,9 @@ namespace DrawingToolkit.Shapes
         {
             this.Startpoint = new Point(this.Startpoint.X + xAmount, this.Startpoint.Y + yAmount);
             this.Endpoint = new Point(this.Endpoint.X + xAmount, this.Endpoint.Y + yAmount);
-            for (int i = 0; i < GraphPoint.Count; i++)
+            foreach(ChartPoint chart in GraphPoint)
             {
-                Point temp = new Point(this.GraphPoint[i].X + xAmount, this.GraphPoint[i].Y+ yAmount);
-                this.GraphPoint[i] = temp;
+                chart.Translate(x,y,xAmount, yAmount);
 
 
             }

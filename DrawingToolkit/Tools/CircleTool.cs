@@ -69,6 +69,7 @@ namespace DrawingToolkit.Tools
                 {
                     varCircle.Endpoint = new System.Drawing.Point(e.X, e.Y);
                     varCircle.Select();
+                    canvas.DeselectAllObject();
                 }
             }
         }

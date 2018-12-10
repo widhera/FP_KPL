@@ -72,6 +72,8 @@
     <Compile Include="ICanvas.cs" />
     <Compile Include="IMenubar.cs" />
     <Compile Include="IMenuItem.cs" />
+    <Compile Include="IObservable.cs" />
+    <Compile Include="IObserver.cs" />
     <Compile Include="ITool.cs" />
     <Compile Include="IToolbar.cs" />
     <Compile Include="IToolbox.cs" />
@@ -92,6 +94,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Tools\CircleTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\ConnectorTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\SelectPointTool.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Tools\SelectTool.cs">

@@ -74,6 +74,7 @@ namespace DrawingToolkit.Tools
                 {
                     varChart.Endpoint = new System.Drawing.Point(e.X, e.Y);
                     varChart.Select();
+                    canvas.DeselectAllObject();
                 }
             }
             

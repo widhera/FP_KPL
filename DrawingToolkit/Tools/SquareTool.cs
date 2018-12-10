@@ -1,6 +1,7 @@
 ﻿using DrawingToolkit.Shapes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,6 +70,7 @@ namespace DrawingToolkit.Tools
                 {
                     varSquare.Endpoint = new System.Drawing.Point(e.X, e.Y);
                     varSquare.Select();
+                    canvas.DeselectAllObject();
                 }
             }
         }

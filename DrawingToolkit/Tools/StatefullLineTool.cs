@@ -69,6 +69,7 @@ namespace DrawingToolkit.Tools
                 {
                     lineSegment.Endpoint = new System.Drawing.Point(e.X, e.Y);
                     lineSegment.Select();
+                    canvas.DeselectAllObject();
                 }
             }
         }

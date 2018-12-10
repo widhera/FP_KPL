@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace DrawingToolkit.Shapes
 {
-    class ChartPoint : DrawingObject
+    public class ChartPoint : DrawingObject
     {
         public Point Startpoint { get; set; }
-        public Point Endpoint { get; set; }
         private Pen pen;
+
         public ChartPoint()
         {
             this.pen = new Pen(Color.Black);
@@ -24,72 +24,34 @@ namespace DrawingToolkit.Shapes
         {
             this.Startpoint = startpoint;
         }
-        public ChartPoint(Point startpoint, Point endpoint) :
-           this(startpoint)
+
+        public void DrawPoint(Graphics g,Pen pen)
         {
-            this.Endpoint = endpoint;
+           
+                Debug.WriteLine(this.Startpoint);
+                g.DrawEllipse(pen, this.Startpoint.X, this.Startpoint.Y, 5, 5);
+           
         }
-        private Rectangle DrawFormula()
-        {
-            Point start = this.Startpoint;
-            Point end = this.Endpoint;
-            if (start.X > end.X)
-            {
-                var temp = start.X;
-                start.X = end.X;
-                end.X = temp;
-            }
-            if (start.Y > end.Y)
-            {
-                var temp = start.Y;
-                start.Y = end.Y;
-                end.Y = temp;
-            }
-            Rectangle objek = new Rectangle(start.X, start.Y, end.X - start.X, end.Y - start.Y);
-            return objek;
-        }
+
         public override void RenderOnStaticView()
         {
-            this.pen = new Pen(Color.Black);
-            pen.Width = 1.5f;
-            if (this.Graphics != null)
-            {
-                Rectangle temp = this.DrawFormula();
-                this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                this.Graphics.DrawEllipse(pen, temp);
-            }
+            
         }
         public override void RenderOnEditingView()
         {
-            this.pen = new Pen(Color.Blue);
-            pen.Width = 1.5f;
-            if (this.Graphics != null)
-            {
-                Rectangle temp = this.DrawFormula();
-                this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                this.Graphics.DrawEllipse(pen, temp);
-            }
+            
         }
         public override void RenderOnPreview()
         {
-            this.pen = new Pen(Color.Red);
-            pen.Width = 1.5f;
-            pen.DashStyle = DashStyle.DashDotDot;
-            if (this.Graphics != null)
-            {
-                Rectangle temp = this.DrawFormula();
-                this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                this.Graphics.DrawEllipse(pen, temp);
-            }
+            
         }
 
         public override bool Intersect(int xTest, int yTest)
         {
             Point start = this.Startpoint;
-            Point end = this.Endpoint;
             // Point test = e.Location;
 
-            if ((xTest >= start.X && xTest <= start.X + (end.X - start.X)) && (yTest >= start.Y && yTest <= start.Y + (end.Y - start.Y)))
+            if ((xTest >= start.X-5 && xTest <= start.X + 5) && (yTest >= start.Y-5 && yTest <= start.Y + 5))
             {
                 Debug.WriteLine("Object " + ID + " is selected.");
                 return true;
@@ -100,7 +62,6 @@ namespace DrawingToolkit.Shapes
         public override void Translate(int x, int y, int xAmount, int yAmount)
         {
             this.Startpoint = new Point(this.Startpoint.X + xAmount, this.Startpoint.Y + yAmount);
-            this.Endpoint = new Point(this.Endpoint.X + xAmount, this.Endpoint.Y + yAmount);
         }
 
         public override void AddGraphPoint(Point location)

@@ -42,6 +42,7 @@ namespace DrawingToolkit
             this.toolbox.AddTool(new CircleTool());
             this.toolbox.AddTool(new ChartTool());
             this.toolbox.AddTool(new AddPointTool());
+            this.toolbox.AddTool(new SelectPointTool());
             this.toolbox.AddTool(new SelectTool());
             this.toolbox.ToolSelected += Toolbox_ToolSelected;
 
