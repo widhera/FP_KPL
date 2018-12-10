@@ -1,7 +1,10 @@
-﻿using System;
+﻿using DrawingToolkit.Shapes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -11,6 +14,7 @@ namespace DrawingToolkit.Tools
     {
         private ICanvas canvas;
         private DrawingObject selectedObject;
+        private DrawingObject PointArea;
         private int xInitial;
         private int yInitial;
 
@@ -34,6 +38,7 @@ namespace DrawingToolkit.Tools
                 this.canvas = value;
             }
         }
+
 
         public SelectPointTool()
         {
@@ -67,7 +72,13 @@ namespace DrawingToolkit.Tools
             {
                 canvas.DeselectAllObject();
                 selectedObject = canvas.SelectObjectAt(e.X, e.Y);
+                if (selectedObject != null)
+                {
+                    PointArea = selectedObject.GetPointArea();
+                }
+                
             }
+
         }
 
         public void ToolMouseMove(object sender, MouseEventArgs e)
@@ -77,11 +88,25 @@ namespace DrawingToolkit.Tools
 
                 if (selectedObject != null)
                 {
-                    int xAmount = e.X - xInitial;
-                    int yAmount = e.Y - yInitial;
-                    xInitial = e.X;
-                    yInitial = e.Y;
-                    selectedObject.Translate(e.X, e.Y, xAmount, yAmount);
+                    if (PointArea.Intersect(e.X,e.Y))
+                    {
+                        if(PointArea.GetPointAreaIntersect(selectedObject,e.X, e.Y))
+                        {
+                            int xAmount = e.X - xInitial;
+                            int yAmount = e.Y - yInitial;
+                            xInitial = e.X;
+                            yInitial = e.Y;
+                            selectedObject.Translate(e.X, e.Y, xAmount, yAmount);
+                            DrawingObject kiri = PointArea.GetConnectorKiri(selectedObject);
+                            DrawingObject kanan = PointArea.GetConnectorKanan(selectedObject);
+                            if(kiri!=null)
+                                kiri.ChangeEndpoint(new Point(selectedObject.GetStartpoint().X + 3, selectedObject.GetStartpoint().Y + 3));
+                            if (kanan != null)
+                                kanan.ChangeStartpoint(new Point(selectedObject.GetStartpoint().X + 3, selectedObject.GetStartpoint().Y + 3));
+                        }
+                       
+                    }
+                    
                 }
             }
         }

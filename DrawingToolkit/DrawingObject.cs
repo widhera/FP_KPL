@@ -2,6 +2,8 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using DrawingToolkit.Shapes;
+using System.Collections.Generic;
 
 namespace DrawingToolkit
 {
@@ -32,6 +34,7 @@ namespace DrawingToolkit
         public abstract void RenderOnPreview();
         public abstract void RenderOnEditingView();
         public abstract void RenderOnStaticView();
+        public abstract DrawingObject SelectObjectAt(int x, int y);
 
         public void ChangeState(DrawingState state)
         {
@@ -42,7 +45,23 @@ namespace DrawingToolkit
         {
             this.state.Draw(this);
         }
-        public abstract void AddGraphPoint(Point location);
+        public abstract void AddGraphPoint(DrawingObject chartpoint);
+        public abstract DrawingObject GetPointArea();
+        public abstract bool GetPointAreaIntersect(DrawingObject point,int xTest, int yTest);
+        public abstract Point GetStartpoint();
+        public abstract void SetSource(DrawingObject src);
+        public abstract void SetDestination(DrawingObject dst);
+        public abstract DrawingObject GetNeighbour(DrawingObject point);
+        public abstract int GetPointCount();
+        public abstract void AddConnectorPoint(DrawingObject connector);
+        public abstract DrawingObject GetSource();
+        public abstract DrawingObject GetDestination();
+        public abstract DrawingObject GetConnectorKiri(DrawingObject point);
+        public abstract DrawingObject GetConnectorKanan(DrawingObject point);
+        public abstract void ChangeStartpoint(Point e);
+        public abstract void ChangeEndpoint(Point e);
+
+
         public virtual void SetGraphics(Graphics graphics)
         {
             this.graphics = graphics;

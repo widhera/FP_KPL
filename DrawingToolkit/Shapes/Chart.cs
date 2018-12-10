@@ -10,13 +10,16 @@ using System.Threading.Tasks;
 
 namespace DrawingToolkit.Shapes
 {
+
     public class  Chart : DrawingObject
     {
         public Point Startpoint { get; set; }
         public Point Endpoint { get; set; }
         private Pen pen;
         //private List <Point> GraphPoint;
-        private List<ChartPoint> GraphPoint;
+        //private List<ChartPoint> GraphPoint;
+        private List<DrawingObject> GraphPoint;
+        private List<DrawingObject> ConnectorPoint;
         //Point point1 = new Point(50, 50);
         //Point point2 = new Point(50, 100);
         //Point point3 = new Point(100, 100);
@@ -26,7 +29,9 @@ namespace DrawingToolkit.Shapes
         {
             this.pen = new Pen(Color.Black);
             pen.Width = 1.5f;
-            this.GraphPoint = new List<ChartPoint>();
+            //this.GraphPoint = new List<ChartPoint>();
+            this.GraphPoint = new List<DrawingObject>();
+            this.ConnectorPoint = new List<DrawingObject>();
         }
         public Chart(Point startpoint) :
            this()
@@ -74,11 +79,11 @@ namespace DrawingToolkit.Shapes
             this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             this.Graphics.DrawRectangle(pen, temp);
             this.Graphics.DrawLines(pen, curvePoint);
-            if(this.GraphPoint!= null)
-            {
+            //if(this.GraphPoint!= null)
+            //{
                 
-                this.DrawPoint();
-            }
+            //    this.DrawPoint();
+            //}
 
         }
       
@@ -107,10 +112,12 @@ namespace DrawingToolkit.Shapes
             return curvePoint;
         }
 
-        public override void AddGraphPoint(Point e)
+        public override void AddGraphPoint(DrawingObject chartPoint)
         {
-            ChartPoint chartPoint = new ChartPoint(new Point(e.X, e.Y));
+            //ChartPoint chartPoint = new ChartPoint(new Point(e.X, e.Y));
             this.GraphPoint.Add(chartPoint);
+            //chartPoint.Select();
+            //canvas.DeselectAllObject();
         }
 
         
@@ -157,9 +164,178 @@ namespace DrawingToolkit.Shapes
             foreach(ChartPoint chart in GraphPoint)
             {
                 chart.Translate(x,y,xAmount, yAmount);
-
-
             }
+            foreach (Connector connector in ConnectorPoint)
+            {
+                connector.Translate(x, y, xAmount, yAmount);
+            }
+        }
+        public DrawingObject GetObjectAt(int x, int y)
+        {
+            foreach (DrawingObject obj in GraphPoint)
+            {
+                if (obj.Intersect(x, y))
+                {
+                    return obj;
+                }
+            }
+            return null;
+        }
+
+        
+
+        public override DrawingObject SelectObjectAt(int x, int y)
+        {
+            DrawingObject obj = GetObjectAt(x, y);
+            if (obj != null)
+            {
+                obj.Select();
+            }
+            return obj;
+        }
+
+        public override DrawingObject GetPointArea()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool GetPointAreaIntersect(DrawingObject point,int xTest, int yTest)
+        {
+            int startY = this.Startpoint.Y;
+            int endY = this.Endpoint.Y;
+            int startX;
+            int endX;
+
+            int indexpoint = GraphPoint.IndexOf(point);
+
+            if (GraphPoint.Count > 0)
+            {
+                if(indexpoint == -1)
+                {
+                    startX = GraphPoint[GraphPoint.Count - 1].GetStartpoint().X+3;
+                    endX = this.Endpoint.X;
+                }
+                else
+                {
+                    if (indexpoint == 0)
+                    {
+                        if(GraphPoint.Count > 1)
+                        {
+                            startX = this.Startpoint.X;
+                            endX = GraphPoint[indexpoint + 1].GetStartpoint().X+3;
+                        }
+                        else
+                        {
+                            startX = this.Startpoint.X;
+                            endX = this.Endpoint.X;
+                        }
+                        
+                    }
+                    else if (indexpoint == GraphPoint.Count - 1)
+                    {
+                        startX = GraphPoint[indexpoint - 1].GetStartpoint().X+3;
+                        endX = this.Endpoint.X;
+                    }
+
+                    else
+                    {
+                        startX = GraphPoint[indexpoint - 1].GetStartpoint().X+3;
+                        endX = GraphPoint[indexpoint + 1].GetStartpoint().X+3;
+                    }
+                }
+                
+                
+            }
+
+            else
+            {
+                startX = this.Startpoint.X;
+                endX = this.Endpoint.X;
+            }
+            
+
+
+            if ((xTest >= startX && xTest <= startX + (endX - startX)) && (yTest >= startY && yTest <= startY + (endY - startY)))
+            {
+                Debug.WriteLine("Object " + ID + " is selected.");
+                return true;
+            }
+            return false;
+        }
+
+        public override Point GetStartpoint()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetSource(DrawingObject src)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetDestination(DrawingObject dst)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetNeighbour(DrawingObject point)
+        {
+            DrawingObject negih1 = GraphPoint[(GraphPoint.IndexOf(point)) - 1];
+            return negih1;
+        }
+
+        public override int GetPointCount()
+        {
+            return GraphPoint.Count;
+        }
+
+        public override void AddConnectorPoint(DrawingObject connector)
+        {
+            ConnectorPoint.Add(connector);
+        }
+
+        public override DrawingObject GetConnectorKiri(DrawingObject point)
+        {
+            foreach(Connector conn in ConnectorPoint)
+            {
+                if(point == conn.GetDestination())
+                {
+                    return conn;
+                }
+            }
+            return null;
+        }
+
+        public override DrawingObject GetConnectorKanan(DrawingObject point)
+        {
+            foreach (Connector conn in ConnectorPoint)
+            {
+                if (point == conn.GetSource())
+                {
+                    return conn;
+                }
+            }
+            return null;
+        }
+
+        public override DrawingObject GetSource()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetDestination()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ChangeStartpoint(Point e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ChangeEndpoint(Point e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

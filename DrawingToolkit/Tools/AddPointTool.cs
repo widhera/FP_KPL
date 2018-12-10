@@ -12,9 +12,13 @@ namespace DrawingToolkit.Tools
 {
     class AddPointTool : ToolStripButton, ITool
     {
-        private DrawingObject selectedObject;
+        private ChartPoint varChartPoint;
+        private Connector varConnector;
+        private DrawingObject PointArea;
         private ICanvas canvas;
-        private DrawingObject varChart;
+        private int xInitial;
+        private int yInitial;
+
         public Cursor Cursor
         {
             get
@@ -60,12 +64,45 @@ namespace DrawingToolkit.Tools
         public void ToolMouseDown(object sender, MouseEventArgs e)
         {
             DrawingObject chart = canvas.GetChart(e.Location.X, e.Location.Y);
+            PointArea = chart;
+            this.xInitial = e.X;
+            this.yInitial = e.Y;
+
             if (chart != null)
             {
-                Debug.WriteLine(e.Location);
-                chart.AddGraphPoint(new Point(e.X,e.Y));
+                if (e.Button == MouseButtons.Left && canvas != null)
+                {
+                    varChartPoint = new ChartPoint(e.Location,chart);
+                    
+                    if (PointArea.Intersect(e.X, e.Y))
+                    {
+                        if (PointArea.GetPointAreaIntersect(varChartPoint, e.X, e.Y))
+                        {
+                            chart.AddGraphPoint(varChartPoint);
+                            canvas.AddDrawingObject(varChartPoint);
+                            if(chart.GetPointCount() > 1)
+                            {
+                                DrawingObject Neighbour = chart.GetNeighbour(varChartPoint);
+                                Connector connector = new Connector(new Point(Neighbour.GetStartpoint().X+3, Neighbour.GetStartpoint().Y + 3));
+                                connector.Endpoint =  new System.Drawing.Point(varChartPoint.GetStartpoint().X+3, varChartPoint.GetStartpoint().Y+3);
+                                connector.SetSource(Neighbour);
+                                connector.SetDestination(varChartPoint);
+                                varConnector = connector;
+                                chart.AddConnectorPoint(connector);
+                                canvas.AddDrawingObject(connector);
+                            }
+                        }
+
+                    }
+                    
+                    
+                }
             }
+           
                 
+
+            
+
         }
 
         public void ToolMouseMove(object sender, MouseEventArgs e)
@@ -75,13 +112,17 @@ namespace DrawingToolkit.Tools
 
         public void ToolMouseUp(object sender, MouseEventArgs e)
         {
-            //if (e.Button == MouseButtons.Left)
-            //{
-            //    if (this.varChart != null)
-            //    {
-            //        varChart.Select();
-            //    }
-            //}
+            if (e.Button == MouseButtons.Left)
+            {
+                if (varChartPoint != null)
+                {
+                    varChartPoint.Select();
+                    //canvas.DeselectAllObject();
+                    if(varConnector != null)
+                        varConnector.Select();
+                    canvas.DeselectAllObject();
+                }
+            }
         }
     }
 }

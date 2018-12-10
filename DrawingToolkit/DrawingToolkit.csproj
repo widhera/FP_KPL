@@ -82,6 +82,7 @@
     <Compile Include="Shapes\Chart.cs" />
     <Compile Include="Shapes\ChartPoint.cs" />
     <Compile Include="Shapes\Circle.cs" />
+    <Compile Include="Shapes\Connector.cs" />
     <Compile Include="Shapes\Square.cs" />
     <Compile Include="Shapes\StatefullLine.cs" />
     <Compile Include="States\EditState.cs" />

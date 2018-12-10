@@ -1,52 +1,33 @@
-﻿using System.Drawing;
-using System.Drawing.Drawing2D;
-using System;
-using System.Diagnostics;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace DrawingToolkit.Shapes
 {
-    public class Circle : DrawingObject
+    public class Connector : DrawingObject
     {
+        private const double EPSILON = 3.0;
+        private DrawingObject source;
+        private DrawingObject destination;
         public Point Startpoint { get; set; }
         public Point Endpoint { get; set; }
         private Pen pen;
-        public Circle()
+        public Connector()
         {
             this.pen = new Pen(Color.Black);
             pen.Width = 1.5f;
         }
-        public Circle(Point startpoint) :
+        public Connector(Point startpoint) :
            this()
         {
             this.Startpoint = startpoint;
         }
-        public Circle(Point startpoint, Point endpoint) :
+        public Connector(Point startpoint, Point endpoint) :
            this(startpoint)
         {
             this.Endpoint = endpoint;
-        }
-        private Rectangle DrawFormula()
-        {
-            Point start = this.Startpoint;
-            Point end = this.Endpoint;
-            if (start.X > end.X)
-            {
-                var temp = start.X;
-                start.X = end.X;
-                end.X = temp;
-            }
-            if (start.Y > end.Y)
-            {
-                var temp = start.Y;
-                start.Y = end.Y;
-                end.Y = temp;
-            }
-            Rectangle objek = new Rectangle(start.X, start.Y, end.X - start.X, end.Y - start.Y);
-            return objek;
         }
         public override void RenderOnStaticView()
         {
@@ -54,20 +35,20 @@ namespace DrawingToolkit.Shapes
             pen.Width = 1.5f;
             if (this.Graphics != null)
             {
-                Rectangle temp = this.DrawFormula();
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                this.Graphics.DrawEllipse(pen, temp);
+                this.Graphics.DrawLine(pen, this.Startpoint, this.Endpoint);
             }
         }
         public override void RenderOnEditingView()
         {
-            this.pen = new Pen(Color.Blue);
+            //RenderOnStaticView();
+            pen.Color = Color.Blue;
             pen.Width = 1.5f;
+            pen.DashStyle = DashStyle.Solid;
             if (this.Graphics != null)
             {
-                Rectangle temp = this.DrawFormula();
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                this.Graphics.DrawEllipse(pen, temp);
+                this.Graphics.DrawLine(pen, this.Startpoint, this.Endpoint);
             }
         }
         public override void RenderOnPreview()
@@ -77,19 +58,22 @@ namespace DrawingToolkit.Shapes
             pen.DashStyle = DashStyle.DashDotDot;
             if (this.Graphics != null)
             {
-                Rectangle temp = this.DrawFormula();
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                this.Graphics.DrawEllipse(pen, temp);
+                this.Graphics.DrawLine(pen, this.Startpoint, this.Endpoint);
             }
         }
-
+        public double GetSlope()
+        {
+            double m = (double)(Endpoint.Y - Startpoint.Y) / (double)(Endpoint.X - Startpoint.X);
+            return m;
+        }
         public override bool Intersect(int xTest, int yTest)
         {
-            Point start = this.Startpoint;
-            Point end = this.Endpoint;
-           // Point test = e.Location;
+            double m = GetSlope();
+            double b = Endpoint.Y - m * Endpoint.X;
+            double y_point = m * xTest + b;
 
-            if ((xTest >= start.X && xTest <= start.X + (end.X - start.X)) && (yTest >= start.Y && yTest <= start.Y + (end.Y - start.Y)))
+            if (Math.Abs(yTest - y_point) < EPSILON)
             {
                 Debug.WriteLine("Object " + ID + " is selected.");
                 return true;
@@ -103,7 +87,6 @@ namespace DrawingToolkit.Shapes
             this.Endpoint = new Point(this.Endpoint.X + xAmount, this.Endpoint.Y + yAmount);
         }
 
-       
 
         public override DrawingObject SelectObjectAt(int x, int y)
         {
@@ -132,12 +115,12 @@ namespace DrawingToolkit.Shapes
 
         public override void SetSource(DrawingObject src)
         {
-            throw new NotImplementedException();
+            this.source = src;
         }
 
         public override void SetDestination(DrawingObject dst)
         {
-            throw new NotImplementedException();
+            this.destination = dst;
         }
 
         public override DrawingObject GetNeighbour(DrawingObject point)
@@ -157,13 +140,15 @@ namespace DrawingToolkit.Shapes
 
         public override DrawingObject GetSource()
         {
-            throw new NotImplementedException();
+            return this.source;
         }
 
         public override DrawingObject GetDestination()
         {
-            throw new NotImplementedException();
+            return this.destination;
         }
+
+        
 
         public override DrawingObject GetConnectorKiri(DrawingObject point)
         {
@@ -177,12 +162,12 @@ namespace DrawingToolkit.Shapes
 
         public override void ChangeStartpoint(Point e)
         {
-            throw new NotImplementedException();
+            this.Startpoint = e;
         }
 
         public override void ChangeEndpoint(Point e)
         {
-            throw new NotImplementedException();
+            this.Endpoint = e;
         }
     }
 }

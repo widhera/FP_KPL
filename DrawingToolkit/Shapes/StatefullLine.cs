@@ -85,7 +85,83 @@ namespace DrawingToolkit.Shapes
             this.Endpoint = new Point(this.Endpoint.X + xAmount, this.Endpoint.Y + yAmount);
         }
 
-        public override void AddGraphPoint(Point location)
+        
+        public override DrawingObject SelectObjectAt(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void AddGraphPoint(DrawingObject chartpoint)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetPointArea()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool GetPointAreaIntersect(DrawingObject point, int xTest, int yTest)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Point GetStartpoint()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetSource(DrawingObject src)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetDestination(DrawingObject dst)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetNeighbour(DrawingObject point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int GetPointCount()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void AddConnectorPoint(DrawingObject connector)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetSource()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetDestination()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetConnectorKiri(DrawingObject point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetConnectorKanan(DrawingObject point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ChangeStartpoint(Point e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ChangeEndpoint(Point e)
         {
             throw new NotImplementedException();
         }
