@@ -6,17 +6,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 
 namespace DrawingToolkit.Shapes
 {
     public class Square : DrawingObject
     {
+        //private string text;
+        //private Font font;
         public Point Startpoint { get; set; }
         public Point Endpoint { get; set; }
         private Pen pen;
         public Square()
         {
+            //this.text = "judul Chart";
+            //this.font = new Font("Times New Roman", 12.0f);
+            //this.textBox1.Location = new System.Drawing.Point(77, 36);
+            //this.textBox1.Name = "textBox1";
+            //this.textBox1.Size = new System.Drawing.Size(216, 20);
+            //this.textBox1.TabIndex = 1;
             this.pen = new Pen(Color.Black);
             pen.Width = 1.5f;
         }
@@ -51,27 +61,24 @@ namespace DrawingToolkit.Shapes
         }
         public override void RenderOnStaticView()
         {
-            //Pen tempPen = this.pen;
-            //this.pen = new Pen(Color.Black);
-            //pen.Width = 1.5f;
             if (this.Graphics != null)
             {
 
                 Rectangle  temp = this.DrawFormula();
-                //Font font = new Font("Times New Roman", 12.0f);
-                //var textSize = this.Graphics.MeasureString("Hola", font);
-                //var state = this.Graphics.Save();
+                //var textSize = this.Graphics.MeasureString(this.text, this.font);
 
                 //this.Graphics.TranslateTransform(temp.Left, temp.Top);
                 //this.Graphics.ScaleTransform(temp.Width / textSize.Width, temp.Height / textSize.Height);
                 //System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
 
-                //this.Graphics.DrawString("Hola", font, brush, PointF.Empty);
-                //this.Graphics.Restore(state);
+                //StringFormat drawFormat = new StringFormat();
+                //drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
                 this.Graphics.DrawRectangle(pen, temp);
+
+                //this.Graphics.DrawString(this.text, font, brush, PointF.Empty, drawFormat);
             }
-            //this.pen = tempPen;
         }
         public override void RenderOnEditingView()
         {
@@ -237,6 +244,16 @@ namespace DrawingToolkit.Shapes
         }
 
         public override int GetIndexPoint(DrawingObject obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ChangeText(string s)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetText()
         {
             throw new NotImplementedException();
         }

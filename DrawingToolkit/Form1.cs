@@ -45,6 +45,8 @@ namespace DrawingToolkit
             this.toolbox.AddTool(new SelectPointTool());
             this.toolbox.AddTool(new RemoveChartPointTool());
             this.toolbox.AddTool(new SelectTool());
+            this.toolbox.AddTool(new AddTextTool());
+            this.toolbox.AddTool(new TextTool());
             this.toolbox.AddTool(new RemoveTool());
             this.toolbox.AddTool(new ColorRedTool());
             this.toolbox.ToolSelected += Toolbox_ToolSelected;

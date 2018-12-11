@@ -1,79 +1,122 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+
 
 namespace DrawingToolkit.Shapes
 {
-    public class Connector : DrawingObject
+    public class Text : DrawingObject
     {
-        private const double EPSILON = 3.0;
-        private DrawingObject source;
-        private DrawingObject destination;
+        private string text;
+        private Font font;
         public Point Startpoint { get; set; }
         public Point Endpoint { get; set; }
         private Pen pen;
-        public Connector()
+        public Text()
         {
+            this.text = "judul Chart";
+            this.font = new Font("Times New Roman", 12.0f);
+            //this.textBox1.Location = new System.Drawing.Point(77, 36);
+            //this.textBox1.Name = "textBox1";
+            //this.textBox1.Size = new System.Drawing.Size(216, 20);
+            //this.textBox1.TabIndex = 1;
             this.pen = new Pen(Color.Black);
-            pen.Width = 2.5f;
+            pen.Width = 1.5f;
         }
-        public Connector(Point startpoint) :
+        public Text(Point startpoint) :
            this()
         {
             this.Startpoint = startpoint;
         }
-        public Connector(Point startpoint, Point endpoint) :
+        public Text(Point startpoint, Point endpoint) :
            this(startpoint)
         {
             this.Endpoint = endpoint;
         }
+        private Rectangle DrawFormula()
+        {
+            Point start = this.Startpoint;
+            Point end = this.Endpoint;
+            if (start.X > end.X)
+            {
+                var temp = start.X;
+                start.X = end.X;
+                end.X = temp;
+            }
+            if (start.Y > end.Y)
+            {
+                var temp = start.Y;
+                start.Y = end.Y;
+                end.Y = temp;
+            }
+            Rectangle objek = new Rectangle(start.X, start.Y, end.X - start.X, end.Y - start.Y);
+            return objek;
+        }
         public override void RenderOnStaticView()
         {
-            this.pen = new Pen(Color.Black);
-            pen.Width = 1.5f;
             if (this.Graphics != null)
             {
+
+                Rectangle temp = this.DrawFormula();
+                var textSize = this.Graphics.MeasureString(this.text, this.font);
+
+                this.Graphics.TranslateTransform(temp.Left, temp.Top);
+                this.Graphics.ScaleTransform(temp.Width / textSize.Width, temp.Height / textSize.Height);
+                System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
+
+                StringFormat drawFormat = new StringFormat();
+                drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                this.Graphics.DrawLine(pen, this.Startpoint, this.Endpoint);
+
+                //this.Graphics.DrawRectangle(pen, temp);
+
+                this.Graphics.DrawString(this.text, font, brush, PointF.Empty);
             }
         }
         public override void RenderOnEditingView()
         {
-            //RenderOnStaticView();
-            pen.Color = Color.Blue;
+            Pen tempPen = this.pen;
+            this.pen = new Pen(Color.Blue);
             pen.Width = 1.5f;
-            pen.DashStyle = DashStyle.Solid;
             if (this.Graphics != null)
             {
+                Rectangle temp = this.DrawFormula();
+
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                this.Graphics.DrawLine(pen, this.Startpoint, this.Endpoint);
+                this.Graphics.DrawRectangle(pen, temp);
             }
+            this.pen = tempPen;
         }
         public override void RenderOnPreview()
         {
+            Pen tempPen = this.pen;
             this.pen = new Pen(Color.Red);
             pen.Width = 1.5f;
             pen.DashStyle = DashStyle.DashDotDot;
             if (this.Graphics != null)
             {
+                Rectangle temp = this.DrawFormula();
+
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                this.Graphics.DrawLine(pen, this.Startpoint, this.Endpoint);
+                this.Graphics.DrawRectangle(pen, temp);
             }
+            this.pen = tempPen;
         }
-        public double GetSlope()
-        {
-            double m = (double)(Endpoint.Y - Startpoint.Y) / (double)(Endpoint.X - Startpoint.X);
-            return m;
-        }
+
         public override bool Intersect(int xTest, int yTest)
         {
-            double m = GetSlope();
-            double b = Endpoint.Y - m * Endpoint.X;
-            double y_point = m * xTest + b;
+            Point start = this.Startpoint;
+            Point end = this.Endpoint;
+            // Point test = e.Location;
 
-            if (Math.Abs(yTest - y_point) < EPSILON)
+            if ((xTest >= start.X && xTest <= start.X + (end.X - start.X)) && (yTest >= start.Y && yTest <= start.Y + (end.Y - start.Y)))
             {
                 Debug.WriteLine("Object " + ID + " is selected.");
                 return true;
@@ -86,6 +129,7 @@ namespace DrawingToolkit.Shapes
             this.Startpoint = new Point(this.Startpoint.X + xAmount, this.Startpoint.Y + yAmount);
             this.Endpoint = new Point(this.Endpoint.X + xAmount, this.Endpoint.Y + yAmount);
         }
+
 
 
         public override DrawingObject SelectObjectAt(int x, int y)
@@ -110,20 +154,20 @@ namespace DrawingToolkit.Shapes
 
         public override Point GetStartpoint()
         {
-            return this.Startpoint;
+            throw new NotImplementedException();
         }
 
         public override void SetSource(DrawingObject src)
         {
-            this.source = src;
+            throw new NotImplementedException();
         }
 
         public override void SetDestination(DrawingObject dst)
         {
-            this.destination = dst;
+            throw new NotImplementedException();
         }
 
-        
+
         public override int GetPointCount()
         {
             throw new NotImplementedException();
@@ -136,15 +180,13 @@ namespace DrawingToolkit.Shapes
 
         public override DrawingObject GetSource()
         {
-            return this.source;
+            throw new NotImplementedException();
         }
 
         public override DrawingObject GetDestination()
         {
-            return this.destination;
+            throw new NotImplementedException();
         }
-
-        
 
         public override DrawingObject GetConnectorKiri(DrawingObject point)
         {
@@ -158,17 +200,17 @@ namespace DrawingToolkit.Shapes
 
         public override void ChangeStartpoint(Point e)
         {
-            this.Startpoint = e;
+            throw new NotImplementedException();
         }
 
         public override void ChangeEndpoint(Point e)
         {
-            this.Endpoint = e;
+            throw new NotImplementedException();
         }
 
         public override void ChangeColorShape(Pen p)
         {
-            throw new NotImplementedException();
+            this.pen = p;
         }
 
         public override List<DrawingObject> GetPointChartAll()
@@ -208,12 +250,12 @@ namespace DrawingToolkit.Shapes
 
         public override void ChangeText(string s)
         {
-            throw new NotImplementedException();
+            this.text = s;
         }
 
         public override string GetText()
         {
-            throw new NotImplementedException();
+            return this.text;
         }
     }
 }

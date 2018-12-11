@@ -52,12 +52,12 @@ namespace DrawingToolkit
 
         private void DefaultCanvas_MouseDown(object sender, MouseEventArgs e)
         {
-
-            if (this.activeTool != null)
-            {
-                this.activeTool.ToolMouseDown(sender, e);
-                this.Repaint();
-            }
+            
+                if (this.activeTool != null)
+                {
+                    this.activeTool.ToolMouseDown(sender, e);
+                    this.Repaint();
+                }
         }
 
         private void DefaultCanvas_Paint(object sender, PaintEventArgs e)

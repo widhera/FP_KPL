@@ -67,6 +67,8 @@ namespace DrawingToolkit
         public abstract List<DrawingObject> GetPointConnectorAll();
         public abstract void RemoveConnector(DrawingObject obj);
         public abstract void RemovePoint(DrawingObject obj);
+        public abstract void ChangeText(string s);
+        public abstract string GetText();
 
 
         public virtual void SetGraphics(Graphics graphics)

@@ -69,6 +69,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
     <Compile Include="ICanvas.cs" />
     <Compile Include="IMenubar.cs" />
     <Compile Include="IMenuItem.cs" />
@@ -85,10 +91,14 @@
     <Compile Include="Shapes\Connector.cs" />
     <Compile Include="Shapes\Square.cs" />
     <Compile Include="Shapes\StatefullLine.cs" />
+    <Compile Include="Shapes\Text.cs" />
     <Compile Include="States\EditState.cs" />
     <Compile Include="States\PreviewState.cs" />
     <Compile Include="States\StaticState.cs" />
     <Compile Include="Tools\AddPointTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\AddTextTool.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Tools\ChartTool.cs">
@@ -121,6 +131,12 @@
     <Compile Include="Tools\StatefullLineTool.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tools\TextTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

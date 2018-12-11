@@ -200,5 +200,15 @@ namespace DrawingToolkit.Shapes
         {
             throw new NotImplementedException();
         }
+
+        public override void ChangeText(string s)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetText()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

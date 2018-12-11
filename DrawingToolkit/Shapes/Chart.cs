@@ -16,20 +16,13 @@ namespace DrawingToolkit.Shapes
         public Point Startpoint { get; set; }
         public Point Endpoint { get; set; }
         private Pen pen;
-        //private List <Point> GraphPoint;
-        //private List<ChartPoint> GraphPoint;
         private List<DrawingObject> GraphPoint;
         private List<DrawingObject> ConnectorPoint;
-        //Point point1 = new Point(50, 50);
-        //Point point2 = new Point(50, 100);
-        //Point point3 = new Point(100, 100);
-        //private Point[] HorizontalVertikal;
 
         public Chart()
         {
             this.pen = new Pen(Color.Black);
             pen.Width = 1.5f;
-            //this.GraphPoint = new List<ChartPoint>();
             this.GraphPoint = new List<DrawingObject>();
             this.ConnectorPoint = new List<DrawingObject>();
         }
@@ -81,12 +74,6 @@ namespace DrawingToolkit.Shapes
             this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             this.Graphics.DrawRectangle(pen, temp);
             this.Graphics.DrawLines(pen, curvePoint);
-            //if(this.GraphPoint!= null)
-            //{
-                
-            //    this.DrawPoint();
-            //}
-
         }
       
 
@@ -116,10 +103,7 @@ namespace DrawingToolkit.Shapes
 
         public override void AddGraphPoint(DrawingObject chartPoint)
         {
-            //ChartPoint chartPoint = new ChartPoint(new Point(e.X, e.Y));
             this.GraphPoint.Add(chartPoint);
-            //chartPoint.Select();
-            //canvas.DeselectAllObject();
         }
 
         
@@ -140,7 +124,7 @@ namespace DrawingToolkit.Shapes
                 start.Y = end.Y;
                 end.Y = temp;
             }
-            Rectangle objek = new Rectangle((start.X-30), (start.Y-30), (end.X+30) - (start.X-30), (end.Y+30) - (start.Y-30));
+            Rectangle objek = new Rectangle((start.X-70), (start.Y-70), (end.X+50) - (start.X-50), (end.Y+70) - (start.Y-70));
             return objek;
         }
 
@@ -149,7 +133,6 @@ namespace DrawingToolkit.Shapes
 
             Point start = this.Startpoint;
             Point end = this.Endpoint;
-            // Point test = e.Location;
 
             if ((xTest >= start.X && xTest <= start.X + (end.X - start.X)) && (yTest >= start.Y && yTest <= start.Y + (end.Y - start.Y)))
             {
@@ -372,6 +355,16 @@ namespace DrawingToolkit.Shapes
         public override void RemovePoint(DrawingObject obj)
         {
             this.GraphPoint.Remove(obj);
+        }
+
+        public override void ChangeText(string s)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetText()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -16,3 +16,4 @@ C:\BEBAS\GIT REPO\FP_KPL\DrawingToolkit\obj\Debug\DrawingToolkit.csproj.Generate
 C:\BEBAS\GIT REPO\FP_KPL\DrawingToolkit\obj\Debug\DrawingToolkit.csproj.CoreCompileInputs.cache
 C:\BEBAS\GIT REPO\FP_KPL\DrawingToolkit\obj\Debug\DrawingToolkit.exe
 C:\BEBAS\GIT REPO\FP_KPL\DrawingToolkit\obj\Debug\DrawingToolkit.pdb
+C:\BEBAS\GIT REPO\FP_KPL\DrawingToolkit\obj\Debug\DrawingToolkit.Form2.resources
