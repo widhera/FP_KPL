@@ -64,18 +64,7 @@ namespace DrawingToolkit
         {
             Pen blackPen = new Pen(Color.Black, 3);
 
-            var grid = new Grid();
-            grid.Children.Add(new Rectangle() { Stroke = Brushes.Red, Fill = Brushes.Blue });
-            grid.Children.Add(new TextBlock() { Text = "some text" });
-            panel.Children.Add(grid);
-            // or
-            panel.Children.Add(new Border()
-            {
-                BorderBrush = Brushes.Red,
-                BorderThickness = new Thickness(1),
-                Background = Brushes.Blue,
-                Child = new TextBlock() { Text = "some text" },
-            });
+            
 
 
             //// Create points that define polygon.
@@ -128,7 +117,7 @@ namespace DrawingToolkit
 
         public DrawingObject GetObjectAt(int x, int y)
         {
-            if (this.activeTool.GetType().Name == "SelectPointTool")
+            if (this.activeTool.GetType().Name == "SelectPointTool" || this.activeTool.GetType().Name == "RemoveChartPointTool")
             {
                 foreach (DrawingObject obj in drawingObjects)
                 {
@@ -192,6 +181,9 @@ namespace DrawingToolkit
             }
         }
 
-        
+        public void RemoveObject(DrawingObject obj)
+        {
+            this.drawingObjects.Remove(obj);
+        }
     }
 }

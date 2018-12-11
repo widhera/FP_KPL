@@ -121,11 +121,7 @@ namespace DrawingToolkit.Shapes
             throw new NotImplementedException();
         }
 
-        public override DrawingObject GetNeighbour(DrawingObject point)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public override int GetPointCount()
         {
             throw new NotImplementedException();
@@ -162,6 +158,46 @@ namespace DrawingToolkit.Shapes
         }
 
         public override void ChangeEndpoint(Point e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ChangeColorShape(Pen p)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetPointChartAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetPointConnectorAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RemoveConnector(DrawingObject obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RemovePoint(DrawingObject obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetNeighbourKiri(DrawingObject point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetNeighbourKanan(DrawingObject point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int GetIndexPoint(DrawingObject obj)
         {
             throw new NotImplementedException();
         }

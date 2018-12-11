@@ -46,7 +46,9 @@ namespace DrawingToolkit.Shapes
         public override void RenderOnStaticView()
         {
             this.pen = new Pen(Color.Black);
-            pen.Width = 1.5f;
+            pen.Width = 3.5f;
+            pen.StartCap = LineCap.ArrowAnchor;
+            pen.EndCap = LineCap.ArrowAnchor;
             if (this.Graphics != null)
             {
                 DrawChartElement();
@@ -278,10 +280,15 @@ namespace DrawingToolkit.Shapes
             throw new NotImplementedException();
         }
 
-        public override DrawingObject GetNeighbour(DrawingObject point)
+        public override DrawingObject GetNeighbourKiri(DrawingObject point)
         {
-            DrawingObject negih1 = GraphPoint[(GraphPoint.IndexOf(point)) - 1];
-            return negih1;
+            DrawingObject negih = GraphPoint[(GraphPoint.IndexOf(point)) - 1];
+            return negih;
+        }
+        public override DrawingObject GetNeighbourKanan(DrawingObject point)
+        {
+            DrawingObject negih = GraphPoint[(GraphPoint.IndexOf(point)) + 1];
+            return negih;
         }
 
         public override int GetPointCount()
@@ -289,6 +296,10 @@ namespace DrawingToolkit.Shapes
             return GraphPoint.Count;
         }
 
+        public override int GetIndexPoint(DrawingObject obj)
+        {
+            return GraphPoint.IndexOf(obj);
+        }
         public override void AddConnectorPoint(DrawingObject connector)
         {
             ConnectorPoint.Add(connector);
@@ -336,6 +347,31 @@ namespace DrawingToolkit.Shapes
         public override void ChangeEndpoint(Point e)
         {
             throw new NotImplementedException();
+        }
+
+        public override void ChangeColorShape(Pen p)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetPointChartAll()
+        {
+            return GraphPoint;
+        }
+
+        public override List<DrawingObject> GetPointConnectorAll()
+        {
+            return ConnectorPoint;
+        }
+
+        public override void RemoveConnector(DrawingObject obj)
+        {
+            this.ConnectorPoint.Remove(obj);
+        }
+
+        public override void RemovePoint(DrawingObject obj)
+        {
+            this.GraphPoint.Remove(obj);
         }
     }
 }

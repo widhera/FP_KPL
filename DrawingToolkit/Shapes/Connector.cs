@@ -17,7 +17,7 @@ namespace DrawingToolkit.Shapes
         public Connector()
         {
             this.pen = new Pen(Color.Black);
-            pen.Width = 1.5f;
+            pen.Width = 2.5f;
         }
         public Connector(Point startpoint) :
            this()
@@ -110,7 +110,7 @@ namespace DrawingToolkit.Shapes
 
         public override Point GetStartpoint()
         {
-            throw new NotImplementedException();
+            return this.Startpoint;
         }
 
         public override void SetSource(DrawingObject src)
@@ -123,11 +123,7 @@ namespace DrawingToolkit.Shapes
             this.destination = dst;
         }
 
-        public override DrawingObject GetNeighbour(DrawingObject point)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public override int GetPointCount()
         {
             throw new NotImplementedException();
@@ -168,6 +164,46 @@ namespace DrawingToolkit.Shapes
         public override void ChangeEndpoint(Point e)
         {
             this.Endpoint = e;
+        }
+
+        public override void ChangeColorShape(Pen p)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetPointChartAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetPointConnectorAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RemoveConnector(DrawingObject obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RemovePoint(DrawingObject obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetNeighbourKiri(DrawingObject point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetNeighbourKanan(DrawingObject point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int GetIndexPoint(DrawingObject obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -51,37 +51,56 @@ namespace DrawingToolkit.Shapes
         }
         public override void RenderOnStaticView()
         {
-            this.pen = new Pen(Color.Black);
-            pen.Width = 1.5f;
+            //Pen tempPen = this.pen;
+            //this.pen = new Pen(Color.Black);
+            //pen.Width = 1.5f;
             if (this.Graphics != null)
             {
+
                 Rectangle  temp = this.DrawFormula();
+                //Font font = new Font("Times New Roman", 12.0f);
+                //var textSize = this.Graphics.MeasureString("Hola", font);
+                //var state = this.Graphics.Save();
+
+                //this.Graphics.TranslateTransform(temp.Left, temp.Top);
+                //this.Graphics.ScaleTransform(temp.Width / textSize.Width, temp.Height / textSize.Height);
+                //System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
+
+                //this.Graphics.DrawString("Hola", font, brush, PointF.Empty);
+                //this.Graphics.Restore(state);
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 this.Graphics.DrawRectangle(pen, temp);
             }
+            //this.pen = tempPen;
         }
         public override void RenderOnEditingView()
         {
+            Pen tempPen = this.pen;
             this.pen = new Pen(Color.Blue);
             pen.Width = 1.5f;
             if (this.Graphics != null)
             {
                 Rectangle temp = this.DrawFormula();
+                
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 this.Graphics.DrawRectangle(pen, temp);
             }
+            this.pen = tempPen;
         }
         public override void RenderOnPreview()
         {
+            Pen tempPen = this.pen;
             this.pen = new Pen(Color.Red);
             pen.Width = 1.5f;
             pen.DashStyle = DashStyle.DashDotDot;
             if (this.Graphics != null)
             {
                 Rectangle temp = this.DrawFormula();
+                
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 this.Graphics.DrawRectangle(pen, temp);
             }
+            this.pen = tempPen;
         }
 
         public override bool Intersect(int xTest, int yTest)
@@ -141,11 +160,7 @@ namespace DrawingToolkit.Shapes
             throw new NotImplementedException();
         }
 
-        public override DrawingObject GetNeighbour(DrawingObject point)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public override int GetPointCount()
         {
             throw new NotImplementedException();
@@ -182,6 +197,46 @@ namespace DrawingToolkit.Shapes
         }
 
         public override void ChangeEndpoint(Point e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ChangeColorShape(Pen p)
+        {
+            this.pen = p;
+        }
+
+        public override List<DrawingObject> GetPointChartAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetPointConnectorAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RemoveConnector(DrawingObject obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RemovePoint(DrawingObject obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetNeighbourKiri(DrawingObject point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DrawingObject GetNeighbourKanan(DrawingObject point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int GetIndexPoint(DrawingObject obj)
         {
             throw new NotImplementedException();
         }

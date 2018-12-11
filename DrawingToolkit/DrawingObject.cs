@@ -51,8 +51,10 @@ namespace DrawingToolkit
         public abstract Point GetStartpoint();
         public abstract void SetSource(DrawingObject src);
         public abstract void SetDestination(DrawingObject dst);
-        public abstract DrawingObject GetNeighbour(DrawingObject point);
+        public abstract DrawingObject GetNeighbourKiri(DrawingObject point);
+        public abstract DrawingObject GetNeighbourKanan(DrawingObject point);
         public abstract int GetPointCount();
+        public abstract int GetIndexPoint(DrawingObject obj);
         public abstract void AddConnectorPoint(DrawingObject connector);
         public abstract DrawingObject GetSource();
         public abstract DrawingObject GetDestination();
@@ -60,6 +62,11 @@ namespace DrawingToolkit
         public abstract DrawingObject GetConnectorKanan(DrawingObject point);
         public abstract void ChangeStartpoint(Point e);
         public abstract void ChangeEndpoint(Point e);
+        public abstract void ChangeColorShape(Pen p);
+        public abstract List<DrawingObject> GetPointChartAll();
+        public abstract List<DrawingObject> GetPointConnectorAll();
+        public abstract void RemoveConnector(DrawingObject obj);
+        public abstract void RemovePoint(DrawingObject obj);
 
 
         public virtual void SetGraphics(Graphics graphics)

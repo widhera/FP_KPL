@@ -97,7 +97,16 @@
     <Compile Include="Tools\CircleTool.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tools\ColorRedTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Tools\ConnectorTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\RemoveChartPointTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\RemoveTool.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Tools\SelectPointTool.cs">

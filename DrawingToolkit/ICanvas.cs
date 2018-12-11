@@ -14,6 +14,7 @@ namespace DrawingToolkit
         void Repaint(); //fungsi untuk menggambar pada canvas
         void SetBackgroundColor(Color color);
         void AddDrawingObject(DrawingObject drawingObject);
+        void RemoveObject(DrawingObject obj);
 
         DrawingObject GetObjectAt(int x, int y);
         DrawingObject SelectObjectAt(int x, int y);

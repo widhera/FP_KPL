@@ -82,7 +82,7 @@ namespace DrawingToolkit.Tools
                             canvas.AddDrawingObject(varChartPoint);
                             if(chart.GetPointCount() > 1)
                             {
-                                DrawingObject Neighbour = chart.GetNeighbour(varChartPoint);
+                                DrawingObject Neighbour = chart.GetNeighbourKiri(varChartPoint);
                                 Connector connector = new Connector(new Point(Neighbour.GetStartpoint().X+3, Neighbour.GetStartpoint().Y + 3));
                                 connector.Endpoint =  new System.Drawing.Point(varChartPoint.GetStartpoint().X+3, varChartPoint.GetStartpoint().Y+3);
                                 connector.SetSource(Neighbour);
