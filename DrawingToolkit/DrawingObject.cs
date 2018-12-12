@@ -46,16 +46,22 @@ namespace DrawingToolkit
             this.state.Draw(this);
         }
         public abstract void AddGraphPoint(DrawingObject chartpoint);
+        public abstract void AddConnectorPoint(DrawingObject connector);
+        public abstract void AddXPoint(DrawingObject point);
+        public abstract void AddXLabel(DrawingObject label);
+        public abstract void AddYPoint(DrawingObject point);
+        public abstract void AddYLabel(DrawingObject label);
+
         public abstract DrawingObject GetPointArea();
         public abstract bool GetPointAreaIntersect(DrawingObject point,int xTest, int yTest);
         public abstract Point GetStartpoint();
+        public abstract Point GetEndpoint();
         public abstract void SetSource(DrawingObject src);
         public abstract void SetDestination(DrawingObject dst);
         public abstract DrawingObject GetNeighbourKiri(DrawingObject point);
         public abstract DrawingObject GetNeighbourKanan(DrawingObject point);
         public abstract int GetPointCount();
         public abstract int GetIndexPoint(DrawingObject obj);
-        public abstract void AddConnectorPoint(DrawingObject connector);
         public abstract DrawingObject GetSource();
         public abstract DrawingObject GetDestination();
         public abstract DrawingObject GetConnectorKiri(DrawingObject point);
@@ -65,6 +71,10 @@ namespace DrawingToolkit
         public abstract void ChangeColorShape(Pen p);
         public abstract List<DrawingObject> GetPointChartAll();
         public abstract List<DrawingObject> GetPointConnectorAll();
+        public abstract List<DrawingObject> GetPointXtAll();
+        public abstract List<DrawingObject> GetPointYAll();
+        public abstract List<DrawingObject> GetLabelXAll();
+        public abstract List<DrawingObject> GetLabelYAll();
         public abstract void RemoveConnector(DrawingObject obj);
         public abstract void RemovePoint(DrawingObject obj);
         public abstract void ChangeText(string s);

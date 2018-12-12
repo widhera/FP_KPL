@@ -16,6 +16,10 @@ namespace DrawingToolkit.Shapes
         public Point Startpoint { get; set; }
         public Point Endpoint { get; set; }
         private Pen pen;
+        private List<DrawingObject> xPoint;
+        private List<DrawingObject> xLabel;
+        private List<DrawingObject> yPoint;
+        private List<DrawingObject> yLabel;
         private List<DrawingObject> GraphPoint;
         private List<DrawingObject> ConnectorPoint;
 
@@ -25,6 +29,10 @@ namespace DrawingToolkit.Shapes
             pen.Width = 1.5f;
             this.GraphPoint = new List<DrawingObject>();
             this.ConnectorPoint = new List<DrawingObject>();
+            this.xPoint = new List<DrawingObject>();
+            this.xLabel = new List<DrawingObject>();
+            this.yPoint = new List<DrawingObject>();
+            this.yLabel = new List<DrawingObject>();
         }
         public Chart(Point startpoint) :
            this()
@@ -39,7 +47,7 @@ namespace DrawingToolkit.Shapes
         public override void RenderOnStaticView()
         {
             this.pen = new Pen(Color.Black);
-            pen.Width = 3.5f;
+            pen.Width = 2.0f;
             pen.StartCap = LineCap.ArrowAnchor;
             pen.EndCap = LineCap.ArrowAnchor;
             if (this.Graphics != null)
@@ -50,7 +58,7 @@ namespace DrawingToolkit.Shapes
         public override void RenderOnEditingView()
         {
             this.pen = new Pen(Color.Blue);
-            pen.Width = 1.5f;
+            pen.Width = 2.0f;
             
             if (this.Graphics != null)
             {
@@ -60,7 +68,7 @@ namespace DrawingToolkit.Shapes
         public override void RenderOnPreview()
         {
             this.pen = new Pen(Color.Red);
-            pen.Width = 1.5f;
+            pen.Width = 2.0f;
             pen.DashStyle = DashStyle.DashDotDot;
             if (this.Graphics != null)
             {
@@ -124,7 +132,7 @@ namespace DrawingToolkit.Shapes
                 start.Y = end.Y;
                 end.Y = temp;
             }
-            Rectangle objek = new Rectangle((start.X-70), (start.Y-70), (end.X+50) - (start.X-50), (end.Y+70) - (start.Y-70));
+            Rectangle objek = new Rectangle((start.X-70), (start.Y-70), (end.X+50) - (start.X-50), (end.Y+60) - (start.Y-60));
             return objek;
         }
 
@@ -153,6 +161,22 @@ namespace DrawingToolkit.Shapes
             foreach (Connector connector in ConnectorPoint)
             {
                 connector.Translate(x, y, xAmount, yAmount);
+            }
+            foreach (DrawingObject point in xPoint)
+            {
+                point.Translate(x, y, xAmount, yAmount);
+            }
+            foreach (DrawingObject point in yPoint)
+            {
+                point.Translate(x, y, xAmount, yAmount);
+            }
+            foreach (DrawingObject label in xLabel)
+            {
+                label.Translate(x, y, xAmount, yAmount);
+            }
+            foreach (DrawingObject label in yLabel)
+            {
+                label.Translate(x, y, xAmount, yAmount);
             }
         }
         public DrawingObject GetObjectAt(int x, int y)
@@ -250,7 +274,12 @@ namespace DrawingToolkit.Shapes
 
         public override Point GetStartpoint()
         {
-            throw new NotImplementedException();
+            return this.Startpoint;
+        }
+
+        public override Point GetEndpoint()
+        {
+            return this.Endpoint;
         }
 
         public override void SetSource(DrawingObject src)
@@ -365,6 +394,45 @@ namespace DrawingToolkit.Shapes
         public override string GetText()
         {
             throw new NotImplementedException();
+        }
+
+        public override void AddXPoint(DrawingObject point)
+        {
+            this.xPoint.Add(point);
+        }
+
+        public override void AddXLabel(DrawingObject label)
+        {
+            this.xLabel.Add(label);
+        }
+
+        public override void AddYPoint(DrawingObject point)
+        {
+            this.yPoint.Add(point);
+        }
+
+        public override void AddYLabel(DrawingObject label)
+        {
+            this.yLabel.Add(label);
+        }
+
+        public override List<DrawingObject> GetPointXtAll()
+        {
+            return xPoint;
+        }
+
+        public override List<DrawingObject> GetPointYAll()
+        {
+            return yPoint;
+        }
+
+        public override List<DrawingObject> GetLabelXAll()
+        {
+            return xLabel;
+        }
+        public override List<DrawingObject> GetLabelYAll()
+        {
+            return yLabel;
         }
     }
 }

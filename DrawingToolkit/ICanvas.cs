@@ -21,5 +21,6 @@ namespace DrawingToolkit
         DrawingObject GetChart(int x, int y);
         List<DrawingObject> GetCanvasObject();
         void DeselectAllObject();
+        void DeselectObjectAt(DrawingObject obj);
     }
 }

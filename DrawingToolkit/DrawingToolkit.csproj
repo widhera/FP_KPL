@@ -101,6 +101,12 @@
     <Compile Include="Tools\AddTextTool.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tools\AddXVariable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\AddYVariable.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Tools\ChartTool.cs">
       <SubType>Component</SubType>
     </Compile>

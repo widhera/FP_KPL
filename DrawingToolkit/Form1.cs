@@ -43,6 +43,8 @@ namespace DrawingToolkit
             this.toolbox.AddTool(new ChartTool());
             this.toolbox.AddTool(new AddPointTool());
             this.toolbox.AddTool(new SelectPointTool());
+            this.toolbox.AddTool(new AddXVariable());
+            this.toolbox.AddTool(new AddYVariable());
             this.toolbox.AddTool(new RemoveChartPointTool());
             this.toolbox.AddTool(new SelectTool());
             this.toolbox.AddTool(new AddTextTool());

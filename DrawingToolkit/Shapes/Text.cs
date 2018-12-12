@@ -21,8 +21,8 @@ namespace DrawingToolkit.Shapes
         private Pen pen;
         public Text()
         {
-            this.text = "judul Chart";
-            this.font = new Font("Times New Roman", 12.0f);
+            this.text = "Text";
+            this.font = new Font("Arial", 12.0f);
             //this.textBox1.Location = new System.Drawing.Point(77, 36);
             //this.textBox1.Name = "textBox1";
             //this.textBox1.Size = new System.Drawing.Size(216, 20);
@@ -59,17 +59,25 @@ namespace DrawingToolkit.Shapes
             Rectangle objek = new Rectangle(start.X, start.Y, end.X - start.X, end.Y - start.Y);
             return objek;
         }
+
         public override void RenderOnStaticView()
         {
+            Point start = this.Startpoint;
+            Point end = this.Endpoint;
             if (this.Graphics != null)
             {
 
                 Rectangle temp = this.DrawFormula();
                 var textSize = this.Graphics.MeasureString(this.text, this.font);
+                var state = this.Graphics.Save();
 
-                this.Graphics.TranslateTransform(temp.Left, temp.Top);
-                this.Graphics.ScaleTransform(temp.Width / textSize.Width, temp.Height / textSize.Height);
-                System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
+                float pos1 = (((end.X - start.X)*2 - (textSize.Width)*2) / 4) + this.Startpoint.X;
+                float pos2 = (((end.Y - start.Y)*2 - (textSize.Height)*2) / 4) + this.Startpoint.Y;
+                PointF aaa = new PointF(pos1, pos2);
+
+                //this.Graphics.TranslateTransform(temp.Left, temp.Top);
+                //this.Graphics.ScaleTransform(temp.Width / textSize.Width, temp.Height / textSize.Height);
+                System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
 
                 StringFormat drawFormat = new StringFormat();
                 drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
@@ -77,7 +85,9 @@ namespace DrawingToolkit.Shapes
 
                 //this.Graphics.DrawRectangle(pen, temp);
 
-                this.Graphics.DrawString(this.text, font, brush, PointF.Empty);
+                this.Graphics.DrawString(this.text, font, brush, aaa);
+                this.Graphics.Restore(state);
+
             }
         }
         public override void RenderOnEditingView()
@@ -90,6 +100,7 @@ namespace DrawingToolkit.Shapes
                 Rectangle temp = this.DrawFormula();
 
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
                 this.Graphics.DrawRectangle(pen, temp);
             }
             this.pen = tempPen;
@@ -256,6 +267,51 @@ namespace DrawingToolkit.Shapes
         public override string GetText()
         {
             return this.text;
+        }
+
+        public override Point GetEndpoint()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void AddXPoint(DrawingObject point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void AddXLabel(DrawingObject label)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void AddYPoint(DrawingObject point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void AddYLabel(DrawingObject label)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetPointXtAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetPointYAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetLabelXAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetLabelYAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -79,9 +79,14 @@ namespace DrawingToolkit.Tools
                 {
                     if (selectedObject.GetType().Name == "Chart")
                     {
-                        List<DrawingObject> ChartElementRemove = new List<DrawingObject>(selectedObject.GetPointChartAll().Count + selectedObject.GetPointConnectorAll().Count);
+                        int listRange = selectedObject.GetPointChartAll().Count + selectedObject.GetPointConnectorAll().Count + selectedObject.GetPointXtAll().Count + selectedObject.GetPointYAll().Count + selectedObject.GetLabelXAll().Count + selectedObject.GetLabelYAll().Count;
+                        List<DrawingObject> ChartElementRemove = new List<DrawingObject>(listRange);
                         ChartElementRemove.AddRange(selectedObject.GetPointChartAll());
                         ChartElementRemove.AddRange(selectedObject.GetPointConnectorAll());
+                        ChartElementRemove.AddRange(selectedObject.GetPointXtAll());
+                        ChartElementRemove.AddRange(selectedObject.GetPointYAll());
+                        ChartElementRemove.AddRange(selectedObject.GetLabelXAll());
+                        ChartElementRemove.AddRange(selectedObject.GetLabelYAll());
                         ChartElementRemove.ForEach(canvas.RemoveObject);
                     }
                     

@@ -257,5 +257,50 @@ namespace DrawingToolkit.Shapes
         {
             throw new NotImplementedException();
         }
+
+        public override Point GetEndpoint()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void AddXPoint(DrawingObject point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void AddXLabel(DrawingObject label)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void AddYPoint(DrawingObject point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void AddYLabel(DrawingObject label)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetPointXtAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetPointYAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetLabelXAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DrawingObject> GetLabelYAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

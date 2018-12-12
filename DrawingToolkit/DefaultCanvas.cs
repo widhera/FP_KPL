@@ -185,5 +185,16 @@ namespace DrawingToolkit
         {
             this.drawingObjects.Remove(obj);
         }
+
+        public void DeselectObjectAt(DrawingObject obj)
+        {
+            foreach (DrawingObject drawObj in drawingObjects)
+            {
+                if(drawObj == obj)
+                {
+                    obj.Deselect();
+                }
+            }
+        }
     }
 }

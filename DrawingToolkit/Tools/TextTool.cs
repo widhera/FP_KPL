@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -67,8 +68,10 @@ namespace DrawingToolkit.Tools
             if (e.Button == MouseButtons.Left && canvas != null)
             {
                 selectedObject = canvas.GetObjectAt(e.X, e.Y);
+                
                 if (selectedObject != null)
                 {
+                    Debug.WriteLine("MAsuk");
                     passingtext = selectedObject.GetText();
                     using (Form2 form2 = new Form2(passingtext, selectedObject, canvas))
                     {
