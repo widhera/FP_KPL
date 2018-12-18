@@ -82,6 +82,7 @@ namespace DrawingToolkit.Tools
                     if (isAllowed)
                     {
                         int yChart = chart.GetEndpoint().Y;
+                        int yPointChart = chart.GetStartpoint().Y;
                         int endxChart = chart.GetEndpoint().X;
                         int startxChart = chart.GetStartpoint().X;
                         int temp = e.X - startxChart;
@@ -90,13 +91,32 @@ namespace DrawingToolkit.Tools
                         DrawingObject point;
                         for (int i = 0; i < countx; i++)
                         {
+                            ChartPoint varChartPoint = new ChartPoint(new Point(chartx - 3, yPointChart), chart);
+                            chart.AddGraphPoint(varChartPoint);
+                            canvas.AddDrawingObject(varChartPoint);
+                            varChartPoint.Select();
+                            if (chart.GetPointCount() > 1)
+                            {
+                                DrawingObject Neighbour = chart.GetNeighbourKiri(varChartPoint);
+                                Connector connector = new Connector(new Point(Neighbour.GetStartpoint().X + 3, Neighbour.GetStartpoint().Y + 3));
+                                connector.Endpoint = new System.Drawing.Point(varChartPoint.GetStartpoint().X + 3, varChartPoint.GetStartpoint().Y + 3);
+                                connector.SetSource(Neighbour);
+                                connector.SetDestination(varChartPoint);
+                                //varConnector = connector;
+                                chart.AddConnectorPoint(connector);
+                                canvas.AddDrawingObject(connector);
+                                
+                                connector.Select();
+                                canvas.DeselectAllObject();
+                            }
+
                             point = new ChartPoint(new Point(chartx - 3, yChart), chart);
                             chart.AddXPoint(point);
                             canvas.AddDrawingObject(point);
                             Text text = new Text(new Point(chartx - temp / 2, yChart + 6));
                             text.Endpoint = new Point(chartx + temp / 2, yChart + 33);
                             text.ChangeText("Text" + (i + 1));
-                            chart.AddXPoint(text);
+                            chart.AddXLabel(text);
                             canvas.AddDrawingObject(text);
                             this.varChartPoint.Add(point);
                             this.textX.Add(text);
@@ -125,6 +145,7 @@ namespace DrawingToolkit.Tools
                         obj.Select();
                     }
                 }
+
                 canvas.DeselectAllObject();
 
             }

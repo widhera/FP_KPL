@@ -79,6 +79,7 @@ namespace DrawingToolkit
         public abstract void RemovePoint(DrawingObject obj);
         public abstract void ChangeText(string s);
         public abstract string GetText();
+        public abstract void ChangePointChart(DrawingObject old, DrawingObject newest);
 
 
         public virtual void SetGraphics(Graphics graphics)

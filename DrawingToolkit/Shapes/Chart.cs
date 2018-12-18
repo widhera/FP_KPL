@@ -434,5 +434,20 @@ namespace DrawingToolkit.Shapes
         {
             return yLabel;
         }
+
+        public override void ChangePointChart(DrawingObject old, DrawingObject newest)
+        {
+
+            for (int i = 0; i < GraphPoint.Count;i++)
+            {
+                if(GraphPoint[i] == old)
+                {
+                    Debug.WriteLine(GraphPoint[i].GetStartpoint());
+                    GraphPoint[i] = newest;
+                    Debug.WriteLine(GraphPoint[i].GetStartpoint());
+                    break;
+                }
+            }
+        }
     }
 }

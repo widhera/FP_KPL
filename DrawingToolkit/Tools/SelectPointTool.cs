@@ -92,11 +92,11 @@ namespace DrawingToolkit.Tools
                     {
                         if(PointArea.GetPointAreaIntersect(selectedObject,e.X, e.Y))
                         {
-                            int xAmount = e.X - xInitial;
+                            int xAmount = 0;
                             int yAmount = e.Y - yInitial;
                             xInitial = e.X;
                             yInitial = e.Y;
-                            selectedObject.Translate(e.X, e.Y, xAmount, yAmount);
+                            selectedObject.Translate(xInitial, e.Y, xAmount, yAmount);
                             DrawingObject kiri = PointArea.GetConnectorKiri(selectedObject);
                             DrawingObject kanan = PointArea.GetConnectorKanan(selectedObject);
                             if(kiri!=null)

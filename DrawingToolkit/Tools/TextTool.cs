@@ -71,15 +71,25 @@ namespace DrawingToolkit.Tools
                 
                 if (selectedObject != null)
                 {
-                    Debug.WriteLine("MAsuk");
-                    passingtext = selectedObject.GetText();
-                    using (Form2 form2 = new Form2(passingtext, selectedObject, canvas))
+                    if(selectedObject.GetType().Name == "Text")
                     {
-                        if (form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        passingtext = selectedObject.GetText();
+                        using (Form2 form2 = new Form2(passingtext, selectedObject, canvas))
                         {
-                            form2.ShowDialog();
+                            if (form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                            {
+                                form2.ShowDialog();
+                            }
                         }
+                        //using (TableChart form2 = new TableChart())
+                        //{
+                        //    if (form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        //    {
+                        //        form2.ShowDialog();
+                        //    }
+                        //}
                     }
+                    
                 }
             }
         }

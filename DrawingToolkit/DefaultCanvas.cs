@@ -196,5 +196,17 @@ namespace DrawingToolkit
                 }
             }
         }
+
+        public void ChangeObject(DrawingObject old, DrawingObject newest)
+        {
+            for(int i = 0; i < drawingObjects.Count; i++)
+            {
+                if (drawingObjects[i] == old)
+                {
+                    drawingObjects[i] = newest;
+                    break;
+                }
+            }
+        }
     }
 }

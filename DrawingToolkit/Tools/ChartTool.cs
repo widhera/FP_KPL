@@ -46,11 +46,37 @@ namespace DrawingToolkit.Tools
             
             if (e.Button == MouseButtons.Left)
             {
+                //DrawingObject clickObject = canvas.GetCanvasObject(e.X,e.Y);
                 varChart = new Chart(new System.Drawing.Point(e.X, e.Y));
                 varChart.Endpoint = new System.Drawing.Point(e.X, e.Y);
                 canvas.AddDrawingObject(varChart);
             }
-            
+            if (e.Button == MouseButtons.Right)
+            {
+                if(varChart.GetPointChartAll().Count == 0 || varChart.GetLabelYAll().Count ==0)
+                {
+                    string s = "Isi point dan label x menggunakan XValue dan label y dengan YValue";
+                    using (Notifikasi form = new Notifikasi(s))
+                    {
+                        if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        {
+                            form.ShowDialog();
+                        }
+                    }
+                }
+                else
+                {
+                    using (TableChart form = new TableChart(varChart, canvas))
+                    {
+                        if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        {
+                            form.ShowDialog();
+                        }
+                    }
+                }
+                
+            }
+
         }
 
         public void ToolMouseMove(object sender, MouseEventArgs e)

@@ -22,5 +22,6 @@ namespace DrawingToolkit
         List<DrawingObject> GetCanvasObject();
         void DeselectAllObject();
         void DeselectObjectAt(DrawingObject obj);
+        void ChangeObject(DrawingObject old, DrawingObject newest);
     }
 }

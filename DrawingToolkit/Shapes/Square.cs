@@ -302,5 +302,10 @@ namespace DrawingToolkit.Shapes
         {
             throw new NotImplementedException();
         }
+
+        public override void ChangePointChart(DrawingObject old, DrawingObject newest)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

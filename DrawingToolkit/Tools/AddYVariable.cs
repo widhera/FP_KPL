@@ -96,7 +96,7 @@ namespace DrawingToolkit.Tools
                             canvas.AddDrawingObject(point);
                             Text text = new Text(new Point(xChart - 60, charty + temp / 2));
                             text.Endpoint = new Point(xChart - 6, charty - temp / 2);
-                            text.ChangeText("Text" + (i + 1));
+                            text.ChangeText((Math.Sqrt(Math.Pow((point.GetStartpoint().Y - this.PointArea.GetEndpoint().Y), 2))).ToString());
                             chart.AddYLabel(text);
                             canvas.AddDrawingObject(text);
                             this.varChartPoint.Add(point);
