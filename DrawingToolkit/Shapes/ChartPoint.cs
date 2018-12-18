@@ -36,12 +36,12 @@ namespace DrawingToolkit.Shapes
 
         public override void RenderOnStaticView()
         {
-            this.pen = new Pen(Color.Black);
+            System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
             pen.Width = 1.5f;
             if (this.Graphics != null)
             {
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                this.Graphics.DrawEllipse(pen, this.Startpoint.X, this.Startpoint.Y, 6, 6);
+                this.Graphics.FillEllipse(myBrush, this.Startpoint.X, this.Startpoint.Y, 6, 6);
             }
         }
         public override void RenderOnEditingView()
