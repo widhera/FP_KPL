@@ -93,6 +93,7 @@ namespace DrawingToolkit.Tools
                         {
                             point = new ChartPoint(new Point(xChart - 6, charty - 3), chart);
                             chart.AddYPoint(point);
+                            point.Select();
                             canvas.AddDrawingObject(point);
                             Text text = new Text(new Point(xChart - 60, charty + temp / 2));
                             text.Endpoint = new Point(xChart - 6, charty - temp / 2);

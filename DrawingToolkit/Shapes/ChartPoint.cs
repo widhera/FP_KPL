@@ -46,22 +46,24 @@ namespace DrawingToolkit.Shapes
         }
         public override void RenderOnEditingView()
         {
+            System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Blue);
             this.pen = new Pen(Color.Blue);
             pen.Width = 1.5f;
             if (this.Graphics != null)
             {
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                this.Graphics.DrawEllipse(pen, this.Startpoint.X, this.Startpoint.Y, 6, 6);
+                this.Graphics.FillEllipse(myBrush, this.Startpoint.X, this.Startpoint.Y, 6, 6);
             }
         }
         public override void RenderOnPreview()
         {
+            System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Blue);
             this.pen = new Pen(Color.Blue);
             pen.Width = 1.5f;
             if (this.Graphics != null)
             {
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                this.Graphics.DrawEllipse(pen, this.Startpoint.X, this.Startpoint.Y, 6, 6);
+                this.Graphics.FillEllipse(myBrush, this.Startpoint.X, this.Startpoint.Y, 6, 6);
             }
         }
 
@@ -69,7 +71,6 @@ namespace DrawingToolkit.Shapes
         {
             Point start = this.Startpoint;
             // Point test = e.Location;
-            Debug.WriteLine("Omasuyk");
             if ((xTest >= start.X && xTest <= start.X+6) && (yTest >= start.Y && yTest <= start.Y + 6))
             {
                 Debug.WriteLine("Object " + ID + " is selected.");

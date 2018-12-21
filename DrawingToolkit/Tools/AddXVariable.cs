@@ -112,6 +112,7 @@ namespace DrawingToolkit.Tools
 
                             point = new ChartPoint(new Point(chartx - 3, yChart), chart);
                             chart.AddXPoint(point);
+                            point.Select();
                             canvas.AddDrawingObject(point);
                             Text text = new Text(new Point(chartx - temp / 2, yChart + 6));
                             text.Endpoint = new Point(chartx + temp / 2, yChart + 33);
@@ -120,7 +121,6 @@ namespace DrawingToolkit.Tools
                             canvas.AddDrawingObject(text);
                             this.varChartPoint.Add(point);
                             this.textX.Add(text);
-
                             chartx += temp;
                         }
                     }

@@ -47,7 +47,10 @@ namespace DrawingToolkit.Shapes
         public override void RenderOnStaticView()
         {
             this.pen = new Pen(Color.Black);
+            AdjustableArrowCap myArrow = new AdjustableArrowCap(2, 2);
             pen.Width = 2.0f;
+            pen.CustomStartCap = myArrow;
+            pen.CustomEndCap = myArrow;
             pen.StartCap = LineCap.ArrowAnchor;
             pen.EndCap = LineCap.ArrowAnchor;
             if (this.Graphics != null)

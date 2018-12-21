@@ -8,8 +8,6 @@ namespace DrawingToolkit
     {
         private IToolbox toolbox;
         private ICanvas canvas;
-        private IToolbar toolbar;
-        private IMenubar menubar;
         public Form1()
         {
             InitializeComponent();
@@ -41,50 +39,19 @@ namespace DrawingToolkit
             this.toolbox.AddTool(new SquareTool());
             this.toolbox.AddTool(new CircleTool());
             this.toolbox.AddTool(new ChartTool());
-            //this.toolbox.AddTool(new AddPointTool());
             this.toolbox.AddTool(new SelectPointTool());
             this.toolbox.AddTool(new AddXVariable());
             this.toolbox.AddTool(new AddYVariable());
-            //this.toolbox.AddTool(new RemoveChartPointTool());
             this.toolbox.AddTool(new SelectTool());
             this.toolbox.AddTool(new AddTextTool());
             this.toolbox.AddTool(new TextTool());
             this.toolbox.AddTool(new RemoveTool());
-            this.toolbox.AddTool(new ColorRedTool());
             this.toolbox.ToolSelected += Toolbox_ToolSelected;
 
-            ////Rectangle tool
-            //this.toolbox.AddTool(new RectangleTool());
-            //this.toolbox.ToolSelected += Toolbox_ToolSelected;
+           
             #endregion
 
-            #region Toolbar
-            // Initializing toolbar
-            Debug.WriteLine("Loading toolbar...");
-            this.toolbar = new DefaultToolbar();
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add((Control)this.toolbar);
 
-            
-            #endregion
-
-            #region Menubar
-            Debug.WriteLine("Loading menubar...");
-            this.menubar = new DefaultMenubar();
-            this.Controls.Add((Control)this.menubar);
-
-            DefaultMenuitem exampleMenuItem1 = new DefaultMenuitem("File");
-            this.menubar.AddMenuItem(exampleMenuItem1);
-            DefaultMenuitem exampleMenuItem11 = new DefaultMenuitem("New");
-            exampleMenuItem1.AddMenuItem(exampleMenuItem11);
-
-            DefaultMenuitem exampleMenuItem2 = new DefaultMenuitem("Edit");
-            this.menubar.AddMenuItem(exampleMenuItem2);
-            DefaultMenuitem exampleMenuItem21 = new DefaultMenuitem("Cut");
-            exampleMenuItem2.AddMenuItem(exampleMenuItem21);
-            DefaultMenuitem exampleMenuItem22 = new DefaultMenuitem("Copy");
-            exampleMenuItem2.AddMenuItem(exampleMenuItem22);
-
-            #endregion
 
             #region Canvas
             Debug.WriteLine("Loading canvas...");

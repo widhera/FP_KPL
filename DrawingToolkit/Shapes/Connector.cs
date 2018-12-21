@@ -32,7 +32,7 @@ namespace DrawingToolkit.Shapes
         public override void RenderOnStaticView()
         {
             this.pen = new Pen(Color.Black);
-            pen.Width = 1.5f;
+            pen.Width = 2.0f;
             if (this.Graphics != null)
             {
                 this.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -43,7 +43,7 @@ namespace DrawingToolkit.Shapes
         {
             //RenderOnStaticView();
             pen.Color = Color.Blue;
-            pen.Width = 1.5f;
+            pen.Width = 2.0f;
             pen.DashStyle = DashStyle.Solid;
             if (this.Graphics != null)
             {
@@ -54,7 +54,7 @@ namespace DrawingToolkit.Shapes
         public override void RenderOnPreview()
         {
             this.pen = new Pen(Color.Red);
-            pen.Width = 1.5f;
+            pen.Width = 2.0f;
             pen.DashStyle = DashStyle.DashDotDot;
             if (this.Graphics != null)
             {
